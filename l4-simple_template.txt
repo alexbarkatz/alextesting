@@ -1,0 +1,97 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+template <class datatype1, class datatype2, class datatype3>//function template with 2 types
+
+class simple
+{
+private:
+	datatype1 name;
+	datatype2 age;
+	datatype3 scores[5];
+
+
+public:
+
+	void input()
+	{
+		cout << "Enter name: ";
+		cin >> name;
+		cout << "\n\nEnter age: ";
+		cin >> age;
+		cout << "\n\nEnter scores:";
+		for (int i = 0; i < 5; i++)
+			cin >> scores[i];
+	}
+
+	void display()
+	{
+		cout << name << "\t" << age << endl;
+		for (int i = 0; i < 5; i++)
+			cout << scores[i] << endl;
+	}
+
+
+	void sort()
+	{
+
+		datatype3 temp;
+		for (int i = 0; i < 4; i++) //outer loop should be one less than list length
+		{
+			for (int j = 0; j<4 - i; j++) // inner loop iterations should decrease by 1 constantly
+			{
+				
+				if (scores[j]>scores[j + 1]) //if numbers are not in ascending order swap
+				{
+					temp = scores[j];
+					scores[j] = scores[j + 1];
+					scores[j + 1] = temp;
+				}
+			}
+		}
+	}
+
+	void search()
+	{
+		int match = 0;
+		datatype3 pick;
+		cout << "What score would you like to search? ";
+		cin >> pick;
+		
+		for (int i = 0; i<5; i++) //plan to search through all elements
+		{
+			if (scores[i] == pick) {
+				match = 1;
+				break;//break loop when element is found to reduce total searches
+			}
+		}
+		if (match == 1)
+			cout << "It is present" << endl;
+		else
+			cout << "It is NOT present" << endl;
+
+		
+	}
+	
+
+
+
+	};
+
+	int main()
+	{
+		simple <string, int, char> object1;//must put actual types in <>
+		object1.input();
+		object1.sort();
+		object1.display();
+		object1.search();
+		simple <string, int, float> object2;
+		object2.input();
+		object2.sort();
+		object2.display();
+		object2.search();
+		return 0;
+	}
+
+

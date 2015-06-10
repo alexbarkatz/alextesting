@@ -1,0 +1,191 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+struct node { //node
+	string fname;
+	string lname;
+	string tel;   //regular data
+	node *link; // pointer to the next node
+};
+
+class ll
+{
+public:
+	ll()
+	{
+		size = 0;
+		head = NULL;
+	}
+
+	void add()
+	{
+		node *next; //create a node pointer
+		next = new node; //create a new node
+		cout << "What is the first name? : " << endl << endl;
+		cin >> next->fname;
+		cout << "What is the last name? : " << endl << endl;
+		cin >> next->lname;
+		cout << "What is your phone number? : " << endl << endl;
+		cin >> next->tel;
+		
+			next->link = head; //link the node to the head
+			head = next; // shift the head to the new node
+		
+			size++;
+	}
+
+	void print()
+	{
+		node *next; //create a node pointer
+		next = head; // link the node pointer to the head
+		
+		for (int i = 0; i<size; i++)
+		{
+			cout << " " << next->fname << "\t" << next->lname << "\t" << next->tel << endl; //display node address and info
+			next = next->link; // move node pointer to the next node
+		}
+
+	}
+
+	void edit()
+	{
+		node *next; // create a node pointer
+		next = head; //link it to the linked list
+		string firstname;
+		
+		cout << "Type first name of who you would like to edit: ";
+		cin >> firstname;
+		for (int i = 0; i<size; i++)
+		{
+			if (firstname == next->fname) //search for value in list
+				break; //store list index
+			else
+			next = next->link;
+		}
+		cout << "Edit first name : " << endl << endl;
+		cin >> next->fname;
+		cout << "Edit last name : " << endl << endl;
+		cin >> next->lname;
+		cout << "Edit phone number : " << endl << endl;
+		cin >> next->tel;
+
+	}
+
+
+
+	void del()
+	{
+		string first;
+		node *p, *q; //create two node pointers
+		
+		p = head; // equate them to the list head
+		q = head;
+		cout << "Which node do you want to delete?";
+		cin >> first;
+
+		if (first == p->fname) //if you want to delete the head
+		{
+			p = p->link; // move one node forward
+			head = p; // replace the head with it
+			delete q; // delete the old head 
+			size--; //reduce size of list
+		}
+		else
+		{
+			for (int i = 0;first == p->fname; i++) //traverse to the node before
+				p = p->link;
+
+			for (int i = 0; first == p->fname; i++) // traverse to the node to be deleted
+				q = q->link;
+			q = q->link;
+
+			p->link = q->link; // move the node
+			delete q; //delete the node
+			size--;//reduce the list size
+		}
+	}
+
+
+	void search()
+	{
+		node *next; // create a node pointer
+		next = head; //link it to the linked list
+		string first;
+		
+		cout << "Type first name of who you're looking for: ";
+		cin >> first;
+		for (int i = 0; i < size; i++)
+		{
+			if (first == next->fname) //search for value in list
+			{
+			
+			cout << next->fname << "\t" << next->lname << "\t" << next->tel << endl;
+			break;
+		}
+			next = next->link;
+		}
+		
+	}
+	
+
+	
+
+private:
+	node *head; //the first node of the first linked list
+	int size;
+};
+
+int main()
+{
+	int choice = 0;
+	ll obj1;
+
+	while (1)
+	{
+		system("cls");
+		cout << "Menu" << endl;
+		cout << "====" << endl;
+		cout << "1. Add a name" << endl;
+		cout << "2. Print list" << endl;
+		cout << "3. Edit" << endl;
+		cout << "4. Delete record" << endl;
+		cout << "5. Search by first name" << endl;
+		
+		
+
+		cin >> choice;
+		switch (choice){
+		case 1:
+			obj1.add();
+			break;
+
+		case 2:
+			obj1.print();
+			break;
+
+		case 3:
+			obj1.edit();
+			break;
+
+		case 4:
+			obj1.del();
+			break;
+
+		case 5:
+			obj1.search();
+			break;
+
+		
+
+		
+		default:
+			cout << "Invalid option" << endl;
+		}
+		system("pause");
+	}
+	return 0;
+}
+
+
+

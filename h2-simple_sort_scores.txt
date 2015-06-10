@@ -1,0 +1,87 @@
+#include<iostream>
+using namespace std;
+
+void scores(int input[], int& size)
+{
+	int i = 0;
+	cout << "Enter in your test scores:\n";
+
+	for (i = 0; i<100; i++)
+	{
+		cin >> input[i];
+		if ((input[i]) == -999){ break; }
+		size++;
+	}
+}
+void display(int transfer[], int& size)
+{
+	int count = 1, i, n1 = 0;
+
+	cout << "Test Score\t" << "Count\n";
+
+	for (i = 0; i < size; ++i)
+	{
+
+		if ((transfer[i] != transfer[i + 1]) && (transfer[i]>0))
+		{
+			if (count == 1)
+				cout << transfer[i] << "\t\t" << count << "\n";
+		}
+		if ((transfer[i] == transfer[i + 1]) && (transfer[i]>0))
+		{
+			n1 = transfer[i];
+			count += 1;
+		}
+		else
+		{
+			if (count > 1)
+			{
+				cout << n1 << "\t\t" << count << "\n";
+				count = 1;
+			}
+		}
+	}
+}
+void sort(int transfer[], int& size)
+{
+	int temp, smallest = 0;
+
+	for (int i = 0; i<(size - 1); i++) //outer loop should be one less than list length
+	{
+		smallest = i;
+		for (int j = i + 1; j<size; j++) // inner loop iterations should decrease by 1 from the front
+		{
+			if (transfer[j]<transfer[smallest]) //move smallest number to top of unsorted list
+			{
+				temp = transfer[j];
+				transfer[j] = transfer[smallest];
+				transfer[smallest] = temp;
+			}
+		}
+	}
+}
+void createArray(int transfer[], int input[], int& size)
+{
+	int *moveOver = new int[size];
+	for (int i = 0; i < size; ++i)
+	{
+		moveOver[i] = input[i];
+		transfer[i] = moveOver[i];
+	}
+}
+
+int main()
+{
+
+	int input[100], size = 0, transfer[100];
+
+	while (1)
+	{
+		scores(input, size);
+		createArray(transfer, input, size);
+		sort(transfer, size);
+		display(transfer, size);
+	}
+	return 0;
+}
+

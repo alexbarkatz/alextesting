@@ -1,0 +1,121 @@
+#include<iostream>
+#include<fstream>
+#include<iomanip>
+#include<string>
+using namespace std;
+
+struct player 
+{
+	string name;
+	int hr;
+	int hits;
+	
+};
+
+void Read(player a[])
+{
+	ifstream inData;
+    inData.open("lab3data.txt");
+	for (int x = 0; x < 10; x++)
+	{
+		inData >> a[x].name >> a[x].hr >> a[x].hits;
+
+
+	}
+
+}
+
+void Display(player b[])
+{
+	for (int i = 0; i < 10; i++)
+	{
+		cout << setw(10)<<b[i].name << "\t" << setw(15) << b[i].hr << "\t" << b[i].hits;
+		cout << endl;
+
+	}
+	cout << endl << endl;
+}
+
+void Edit(player c[])
+{
+	int j = 10;
+	string names;
+	
+	while (j == 10)
+	{
+		cout << "Please Enter Player name: ";
+		cin >> names;
+		for (int i = 0; i < 10; i++)
+		{
+			if (names == c[i].name)
+			{
+				j = i;
+				break;
+			}
+
+		}
+	}
+		cout << "\nPlease enter player's hr's: ";
+		cin >> c[j].hr;
+		cout << "\n\nPlease enter player's hits: ";
+		cin >> c[j].hits;
+	
+}
+
+
+void Save(player d[])
+{
+	
+	ofstream outData("lab3data.txt", ios::out);
+	
+	for (int x = 0; x < 10; x++)
+	{
+		outData << d[x].name << " " << d[x].hr << " " << d[x].hits <<endl;
+	}
+	outData.close();
+	exit(1);
+}
+
+int main()
+{
+	player stats[10];
+	Read(stats);
+	int option;
+
+	while (1)
+	{
+		
+		cout << "1. Display" << endl << "\n2. Edit" << "\n\n3. Save" << endl << endl;
+		cout << "What would you like to do?: ";
+		cin >> option;
+
+		switch (option)
+		{
+
+		case 1:
+
+			Display(stats);
+			break;
+
+		case 2:
+
+			Edit(stats);
+			break;
+
+		case 3:
+
+			Save(stats);
+			break;
+		}
+	}
+
+
+	
+
+
+
+
+	system("pause");
+	return 0;
+
+}

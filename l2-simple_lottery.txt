@@ -1,0 +1,78 @@
+#include<iostream>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
+#include <algorithm>
+
+using namespace std;
+//void response(char answer);
+
+int main()
+
+{
+	srand(time(NULL));
+	int i,k,j,m;
+	int temp;
+	int location;
+	int playernums[5];
+	int pstorenums[5];
+	int lstorenums[5];
+	int lotterynums[40] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40 };
+	random_shuffle(&lotterynums[0], &lotterynums[40]);
+
+	cout << setw(20) << "Welcome To Alex's Lottery Game!  Good Luck!!!" << endl << endl << endl;
+	
+
+	
+	for (int i = 1; i < 5; i++)//start from 2nd item to end
+	{
+		if (lotterynums[i] < lotterynums[i - 1]) //compare the two items
+		{
+
+			temp = lotterynums[i]; //store item and location
+			location = i;
+			do //compare present item to all the sorted items and insert in right place
+			{
+
+				lotterynums[location] = lotterynums[location - 1];
+				location--;
+			} while (location > 0 && lotterynums[location - 1] > temp);
+			lotterynums[location] = temp;
+		}
+		}
+
+		cout << "\nPick 5 numbers between 1 and 40: ";
+
+		for (k = 0; k < 5; k++)
+		{
+			cin >> playernums[k];
+
+			pstorenums[k] = playernums[k];
+			lstorenums[k] = lotterynums[k];
+
+		}
+
+		cout << "\n\nThe numbers you picked are: ";
+		for (m = 0; m < 5; m++)
+		{
+			cout << "\t" << pstorenums[m];
+		}
+		cout << endl << endl << endl;
+
+		cout << "\nThe Lottery numbers are: ";
+		for (j = 0; j < 5; j++)
+		{
+			cout << "\t" << lstorenums[j];
+		}
+
+		cout << endl;
+
+
+	
+
+
+	system("pause");
+
+	return 0;
+
+}

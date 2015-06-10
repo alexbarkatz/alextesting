@@ -1,0 +1,181 @@
+#include <iostream>
+
+
+using namespace std;
+void book(char **p, int r, int c);
+void display(char **p, int r, int c);
+void cancel(char **p, int r, int c);
+void count(char **p, int r, int c);
+
+int main()
+
+{
+
+
+	int choice;
+	
+	int r, c;
+	int i, j;
+	char **p;//double pointer
+	
+	
+
+
+
+
+		
+		
+
+
+			cout << "Enter rows:";
+			cin >> r;
+			cout << "Enter columns:";
+			cin >> c;
+			p = new char*[r];//array of pointers
+			for (int i = 0; i < r; i++)
+				p[i] = new char[c];//dynamic array creation
+			for (i = 0; i < r; i++)
+			{
+				for (j = 0; j < c; j++)
+				{
+					p[i][j] = 'A';
+				}
+			}
+			
+
+			while (1)
+
+			{
+			cout << "AIRLINE RESERVATION SYSTEM:" << endl;
+			cout << "Menu:" << endl;
+			cout << "1: Book a Seat" << endl;
+			cout << "2: Cancel Booking" << endl;
+			cout << "3: Display" << endl;
+			cout << "4: Count" << endl<<endl<<endl;
+
+			cin >> choice;
+
+			switch (choice)
+			{
+			case 1:
+
+				book(p, r, c);
+
+
+				
+				
+				break;
+			case 2:
+
+				cancel(p, r, c);
+				
+				break;
+
+			case 3:
+				display(p, r, c);
+				
+				
+				break;
+
+			case 4:
+				count(p, r, c);
+
+				break;
+			}
+
+		}
+		return 0;
+
+	}
+
+
+void book(char **p, int r, int c)
+{
+	int i;
+	int j;
+	for (i = 0; i < r; i++)
+	{
+		for (j = 0; j < c; j++)
+		{
+			cout << p[i][j] << "\t";
+		}
+		cout << endl;
+	}
+	int row, column;
+	cout << "\n\nWhich row would you like to book: " << endl;
+	cin >> row;
+	cout << "\n\nWhich column would you like to book: " << endl;
+	cin >> column;
+	if (p[row][column] = 'A')
+
+		p[row][column] = 'T';
+	
+	else
+		cout << "\n\nThis seat is already booked" << endl;
+}
+
+
+void display(char **p, int r, int c)
+{
+	int i;
+	int j,k;
+	for (k = 0; k < c; k++)
+	{
+		cout << "\t" << k;
+	}
+	for (i = 0; i < r; i++)
+	{
+		cout <<endl<< i<<"\t";
+		for (j = 0; j < c; j++)
+		{
+			cout << p[i][j] << "\t";
+		}
+		cout << endl;
+	}
+}
+
+
+void cancel(char **p, int r, int c)
+{
+	int i;
+	int j;
+	for (i = 0; i < r; i++)
+	{
+		for (j = 0; j < c; j++)
+		{
+			cout << p[i][j] << "\t";
+		}
+		cout << endl;
+	}
+	int row, column;
+	cout << "\n\nWhich row would you like to cancel: " << endl;
+	cin >> row;
+	cout << "\n\nWhich column would you like to cancel: " << endl;
+	cin >> column;
+	if (p[row][column] = 'T')
+
+		p[row][column] = 'A';
+
+	else
+		cout << "\nThis seat does not need to be cancelled" << endl;
+}
+
+void count(char **p, int r, int c)
+{
+	int i, j;
+	int countup = 0;
+	for (i = 0; i < r; i++)
+	{
+		for (j = 0; j < c; j++)
+		{
+			if (p[i][j] = 'A')
+			{
+				countup++;
+			}
+		}
+	}
+	cout << countup<<endl << endl;
+
+
+}
+
